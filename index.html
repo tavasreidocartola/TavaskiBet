@@ -1,0 +1,286 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TavaskiBet - Login</title>
+    <style>
+        /* Reset básico */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #FF4B2B, #FF416C); /* Gradiente de fundo */
+            color: white;
+            text-align: center;
+            padding: 0;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px 0;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            font-size: 3em;
+            color: #fff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        header nav {
+            margin-top: 20px;
+        }
+
+        header nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2em;
+            text-transform: uppercase;
+        }
+
+        header nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* Formulário de Login */
+        .login-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 40px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .login-container button {
+            width: 100%;
+            padding: 12px;
+            background-color: #FF416C;
+            border: none;
+            color: white;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .login-container button:hover {
+            background-color: #FF4B2B;
+        }
+
+        .login-container h2 {
+            margin-bottom: 20px;
+        }
+
+        /* Seção de Jogos */
+        main {
+            margin: 20px;
+        }
+
+        .saldo {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+        }
+
+        .jogos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .jogo-item {
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .jogo-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .jogo-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .jogo-item h3 {
+            font-size: 1.5em;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .jogo-item label {
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .jogo-item input {
+            padding: 10px;
+            font-size: 1em;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+            width: 80%;
+            max-width: 250px;
+            text-align: center;
+        }
+
+        .jogo-item button {
+            background-color: #FF416C;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.2em;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .jogo-item button:hover {
+            background-color: #FF4B2B;
+        }
+
+        /* Multiplicador */
+        .jogo-item span {
+            display: block;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1em;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .jogo-item input {
+                width: 70%;
+            }
+
+            .jogo-item button {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Tela de Login -->
+    <div class="login-container">
+        <h2>Login TavaskiBet</h2>
+        <input type="text" id="username" placeholder="Usuário">
+        <input type="password" id="password" placeholder="Senha">
+        <button onclick="fazerLogin()">Entrar</button>
+    </div>
+
+    <!-- Seção de Jogos (oculta até o login) -->
+    <main style="display:none;" id="main-content">
+        <section class="saldo">
+            <h3>Saldo Disponível: R$2500,00</h3>
+        </section>
+
+        <section class="jogos">
+            <h2>Jogos Disponíveis</h2>
+
+            <!-- Jogo Mines -->
+            <div class="jogo-item">
+                <img src="mines-icon.jpg" alt="Mines">
+                <h3>Mines</h3>
+                <label for="mines-bet">Valor da Aposta:</label>
+                <input type="number" id="mines-bet" placeholder="R$ 50,00" min="50" step="50">
+                <br>
+                <label for="mines-count">Número de Minas:</label>
+                <select id="mines-count">
+                    <option value="1">1 Mina</option>
+                    <option value="2">2 Minas</option>
+                    <option value="3">3 Minas</option>
+                    <option value="4">4 Minas</option>
+                    <option value="5">5 Minas</option>
+                    <option value="6">6 Minas</option>
+                    <option value="7">7 Minas</option>
+                    <option value="8">8 Minas</option>
+                </select>
+                <br>
+                <span>Multiplicador: <strong id="multiplicador-minas">2x - 16x</strong></span>
+                <br>
+                <button onclick="calcularMultiplicador()">Jogar Agora</button>
+            </div>
+
+            <!-- Jogo Aviator -->
+            <div class="jogo-item">
+                <img src="aviator-icon.jpg" alt="Aviator">
+                <h3>Aviator</h3>
+                <label for="aviator-bet">Valor da Aposta:</label>
+                <input type="number" id="aviator-bet" placeholder="R$ 50,00" min="50" step="50">
+                <br>
+                <span>Multiplicador: <strong id="multiplicador-aviator">1x - 10x</strong></span>
+                <br>
+                <button onclick="calcularMultiplicadorAviator()">Jogar Agora</button>
+            </div>
+
+            <!-- Outros jogos aqui -->
+        </section>
+    </main>
+
+    <footer>
+        <a href="#">Política de Privacidade</a>
+        <a href="#">Termos de Serviço</a>
+        <a href="#">Suporte ao Cliente</a>
+        <a href="#">Contatos</a>
+    </footer>
+
+    <script>
+        // Função para simular o login
+        function fazerLogin() {
+            var usuario = document.getElementById('username').value;
+            var senha = document.getElementById('password').value;
+
+            if (usuario === "" || senha === "") {
+                alert("Preencha todos os campos!");
+                return;
+            }
+
+            // Aqui, normalmente, você validaria o login com o servidor.
+            alert("Login bem-sucedido!");
+            // Após login bem-sucedido, mostra a área de jogos
+            document.querySelector('.login-container').style.display = 'none';
