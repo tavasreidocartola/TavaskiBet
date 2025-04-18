@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TavaskiBet - Login</title>
+    <title>TavaskiBet - Login/Cadastro</title>
     <style>
         /* Reset básico */
         * {
@@ -19,36 +19,7 @@
             text-align: center;
         }
 
-        header {
-            background-color: rgba(0, 0, 0, 0.7);
-            padding: 20px 0;
-            margin-bottom: 20px;
-        }
-
-        header h1 {
-            font-size: 3em;
-            color: #fff;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        header nav {
-            margin-top: 20px;
-        }
-
-        header nav a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.2em;
-            text-transform: uppercase;
-        }
-
-        header nav a:hover {
-            text-decoration: underline;
-        }
-
-        .login-container {
+        .container {
             max-width: 400px;
             margin: 80px auto;
             padding: 40px;
@@ -56,7 +27,7 @@
             border-radius: 10px;
         }
 
-        .login-container input {
+        input {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
@@ -65,7 +36,7 @@
             border: 1px solid #ddd;
         }
 
-        .login-container button {
+        button {
             width: 100%;
             padding: 12px;
             background-color: #FF416C;
@@ -76,15 +47,19 @@
             cursor: pointer;
         }
 
-        .login-container button:hover {
+        button:hover {
             background-color: #FF4B2B;
         }
 
-        .login-container h2 {
-            margin-bottom: 20px;
+        .switch {
+            margin-top: 15px;
+            cursor: pointer;
+            text-decoration: underline;
+            color: #ccc;
         }
 
         main {
+            display: none;
             margin: 20px;
         }
 
@@ -106,7 +81,6 @@
             padding: 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            text-align: center;
         }
 
         .jogo-item:hover {
@@ -118,50 +92,6 @@
             max-width: 100%;
             height: auto;
             border-radius: 10px;
-        }
-
-        .jogo-item h3 {
-            font-size: 1.5em;
-            margin-top: 10px;
-            margin-bottom: 15px;
-        }
-
-        .jogo-item label {
-            font-size: 1.1em;
-            margin-bottom: 5px;
-        }
-
-        .jogo-item input,
-        .jogo-item select {
-            padding: 10px;
-            font-size: 1em;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            margin-bottom: 15px;
-            width: 80%;
-            max-width: 250px;
-            text-align: center;
-        }
-
-        .jogo-item button {
-            background-color: #FF416C;
-            border: none;
-            padding: 12px 30px;
-            font-size: 1.2em;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        .jogo-item button:hover {
-            background-color: #FF4B2B;
-        }
-
-        .jogo-item span {
-            display: block;
-            font-size: 1.2em;
-            margin-top: 10px;
         }
 
         footer {
@@ -181,34 +111,30 @@
         footer a:hover {
             text-decoration: underline;
         }
-
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2em;
-            }
-
-            .jogo-item input {
-                width: 70%;
-            }
-
-            .jogo-item button {
-                font-size: 1em;
-            }
-        }
     </style>
 </head>
 <body>
 
-    <!-- Tela de Login -->
-    <div class="login-container">
+    <!-- Cadastro -->
+    <div class="container" id="cadastro-container">
+        <h2>Cadastro TavaskiBet</h2>
+        <input type="text" id="new-username" placeholder="Novo Usuário">
+        <input type="password" id="new-password" placeholder="Nova Senha">
+        <button onclick="fazerCadastro()">Cadastrar</button>
+        <p class="switch" onclick="mostrarLogin()">Já tem conta? Fazer login</p>
+    </div>
+
+    <!-- Login -->
+    <div class="container" id="login-container" style="display: none;">
         <h2>Login TavaskiBet</h2>
         <input type="text" id="username" placeholder="Usuário">
         <input type="password" id="password" placeholder="Senha">
         <button onclick="fazerLogin()">Entrar</button>
+        <p class="switch" onclick="mostrarCadastro()">Ainda não tem conta? Cadastre-se</p>
     </div>
 
-    <!-- Seção de Jogos (oculta até o login) -->
-    <main style="display:none;" id="main-content">
+    <!-- Área Principal -->
+    <main id="main-content">
         <header>
             <h1>TavaskiBet</h1>
         </header>
@@ -224,10 +150,9 @@
             <div class="jogo-item">
                 <img src="mines-icon.jpg" alt="Mines">
                 <h3>Mines</h3>
-                <label for="mines-bet">Valor da Aposta:</label>
-                <input type="number" id="mines-bet" placeholder="R$ 50,00" min="50" step="50">
-                <br>
-                <label for="mines-count">Número de Minas:</label>
+                <label>Valor da Aposta:</label><br>
+                <input type="number" id="mines-bet" placeholder="R$ 50,00" min="50" step="50"><br>
+                <label>Número de Minas:</label><br>
                 <select id="mines-count">
                     <option value="1">1 Mina</option>
                     <option value="2">2 Minas</option>
@@ -238,9 +163,7 @@
                     <option value="7">7 Minas</option>
                     <option value="8">8 Minas</option>
                 </select>
-                <br>
-                <span>Multiplicador: <strong id="multiplicador-minas">2x - 16x</strong></span>
-                <br>
+                <span>Multiplicador: <strong id="multiplicador-minas">2x - 16x</strong></span><br>
                 <button onclick="calcularMultiplicador()">Jogar Agora</button>
             </div>
 
@@ -248,11 +171,9 @@
             <div class="jogo-item">
                 <img src="aviator-icon.jpg" alt="Aviator">
                 <h3>Aviator</h3>
-                <label for="aviator-bet">Valor da Aposta:</label>
-                <input type="number" id="aviator-bet" placeholder="R$ 50,00" min="50" step="50">
-                <br>
-                <span>Multiplicador: <strong id="multiplicador-aviator">1x - 10x</strong></span>
-                <br>
+                <label>Valor da Aposta:</label><br>
+                <input type="number" id="aviator-bet" placeholder="R$ 50,00" min="50" step="50"><br>
+                <span>Multiplicador: <strong id="multiplicador-aviator">1x - 10x</strong></span><br>
                 <button onclick="calcularMultiplicadorAviator()">Jogar Agora</button>
             </div>
         </section>
@@ -266,20 +187,55 @@
     </footer>
 
     <script>
-        function fazerLogin() {
-            var usuario = document.getElementById('username').value;
-            var senha = document.getElementById('password').value;
+        function mostrarCadastro() {
+            document.getElementById('login-container').style.display = 'none';
+            document.getElementById('cadastro-container').style.display = 'block';
+        }
+
+        function mostrarLogin() {
+            document.getElementById('cadastro-container').style.display = 'none';
+            document.getElementById('login-container').style.display = 'block';
+        }
+
+        function fazerCadastro() {
+            let usuario = document.getElementById('new-username').value;
+            let senha = document.getElementById('new-password').value;
 
             if (usuario === "" || senha === "") {
                 alert("Preencha todos os campos!");
                 return;
             }
 
-            alert("Login bem-sucedido!");
-            document.querySelector('.login-container').style.display = 'none';
-            document.getElementById('main-content').style.display = 'block';
+            // Armazena no localStorage (simulação)
+            localStorage.setItem("usuario", usuario);
+            localStorage.setItem("senha", senha);
+            alert("Cadastro realizado com sucesso! Agora faça login.");
+            mostrarLogin();
+        }
+
+        function fazerLogin() {
+            let usuario = document.getElementById('username').value;
+            let senha = document.getElementById('password').value;
+
+            let userCadastrado = localStorage.getItem("usuario");
+            let senhaCadastrada = localStorage.getItem("senha");
+
+            if (usuario === "" || senha === "") {
+                alert("Preencha todos os campos!");
+                return;
+            }
+
+            if (usuario === userCadastrado && senha === senhaCadastrada) {
+                alert("Login bem-sucedido!");
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+            } else {
+                alert("Usuário ou senha inválidos!");
+            }
         }
 
         function calcularMultiplicador() {
             var minas = parseInt(document.getElementById('mines-count').value);
             var multiplicador = (2 + minas * 1.5).toFixed(2);
+            document.getElementById('multiplicador-minas').textContent = multiplicador + "x";
+            alert("Você jogou Mines com " + minas + " mina(s). Multiplicador: " + multiplicador + "x");
